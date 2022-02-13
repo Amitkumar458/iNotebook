@@ -7,14 +7,14 @@ const Newsitem = (props) => {
     const { deleteNote } = context;
     const ref = useRef(null);
     const refclose = useRef(null);
-    const [deleteid , setdeleteid] = useState({noteid:""});
+    const [deleteid , setdeleteid] = useState(null);
     const deleteclick = (note) => {
         ref.current.click();
-        setdeleteid({noteid:note._id});
+        setdeleteid(note._id);
     }
     
     const deleteyesclick = () => {
-        deleteNote(deleteid.noteid);
+        deleteNote(deleteid);
         refclose.current.click();
     }
 

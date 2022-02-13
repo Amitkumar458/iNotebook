@@ -35,7 +35,6 @@ router.post('/addnote', fetchuser, [
         res.json([savenote]);
     } catch (error) {
         res.send(error);
-        console.log(error);
     }
 });
 
@@ -56,7 +55,7 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
             return res.status(401).send("you not allow update another note");
         }
 
-        let = noteupdated = await notesdata.findByIdAndUpdate(req.params.id, { $set: newnote }, { new: true });
+        let noteupdated = await notesdata.findByIdAndUpdate(req.params.id, { $set: newnote }, { new: true });
         res.json({ noteupdated });
     } catch (error) {
         res.send(error);

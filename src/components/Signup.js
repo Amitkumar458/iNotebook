@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import noteContext from "../context/notes/noteContext";
 
 const Signup = () => {
+  const context = useContext(noteContext);
+    const { posttodolist , addNote } = context;
   
   const [userdata, setuserdata] = useState({ name: "", email: "", password: "" });
   const [error, seterror] = useState({ error: "" });
-
   let history = useHistory();
 
   const handelSubmit = async (e) => {
@@ -18,10 +20,11 @@ const Signup = () => {
       body: JSON.stringify({ name: userdata.name, email: userdata.email, password: userdata.password })
     });
     const json = await response.json();
-    console.log(json);
     if (json.success) {
       localStorage.setItem('token', json.authtoken);
       history.push("/");
+      posttodolist(["hack nasa using html" , "hack google using css"]);
+      addNote("Note title" , "This is the example of a note you can also delete and edit this note your note is save in database" , "Show note");
     }
     else {
       return seterror({ error: json.error[0].msg });
@@ -37,7 +40,8 @@ const Signup = () => {
       <div className="wrapper">
         <div className="logo"> <img src="/43171013.jpg" alt="loading img..." />
         </div>
-        <div className="text-center mt-4 name">iNotebook</div>
+        <div className="text-center mt-4">Create an Account to use</div>
+        <div className="text-center mt-1 name">iNotebook</div>
         <form className="p-3 mt-3" onSubmit={handelSubmit} >
           <div className="form-field d-flex align-items-center"> <input type="text"
             name="name" id="name" onChange={onchange} value={userdata.name} placeholder="Name" required /> </div>

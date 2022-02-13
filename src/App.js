@@ -1,11 +1,12 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import About from './components/About';
+// import About from './components/About';
 import Home from './components/Home';
 import Author from './components/Author'
 import Notes from './components/Notes';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Todolist from './components/Todolist';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,10 +21,9 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
-          <div className='container'>
             <Switch>
-              <Route exact path="/about">
-                <About />
+              <Route exact path="/todo">
+                <Todolist />
               </Route>
               <Route exact path="/login">
                 <Author />
@@ -39,7 +39,6 @@ function App() {
                 <Notes />
               </Route>
             </Switch>
-          </div>
         </Router>
       </NoteState>
     </>

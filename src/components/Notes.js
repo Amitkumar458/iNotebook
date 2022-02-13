@@ -1,14 +1,21 @@
 import React from "react";
 import { useContext, useEffect, useRef , useState } from "react";
+import { useHistory } from "react-router-dom";
 import noteContext from "../context/notes/noteContext";
 import Newsitem from "./Newsitem";
 
 const Notes = () => {
     const context = useContext(noteContext);
     const { usernotes, getNotes , updateNote } = context;
+    const history = useHistory();
     useEffect(() => {
-        getNotes()
-    } , [getNotes]);
+        if (localStorage.getItem('token')) {
+            getNotes();
+        }
+        else{
+           history.push("/login");
+        }
+    } ,[]);
     const ref = useRef(null);
     const refclose = useRef(null);
     const updNote = (noteedited) => {
@@ -29,7 +36,7 @@ const Notes = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
 
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
