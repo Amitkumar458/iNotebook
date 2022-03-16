@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "npm run both",
+    "start": "cd ./backend/ && npm install && cd../ && npm run both",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
